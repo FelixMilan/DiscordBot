@@ -34,13 +34,13 @@ client.on('ready', () => {  //when the bot goes online create a console log
         options: [ //these will be what you can use within this command
             {
                 name: 'number1', //name must not contain spaces
-                description: 'The first number.',
+                description: 'The 1st number.',
                 required: true, //need this number
                 type: DiscordJS.Constants.ApplicationCommandOptionTypes.NUMBER,
             },
             {
                 name: 'number2',
-                description: 'The second number.',
+                description: 'The 2nd number.',
                 required: true, //need this number
                 type: DiscordJS.Constants.ApplicationCommandOptionTypes.NUMBER,
             },
