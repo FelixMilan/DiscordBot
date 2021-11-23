@@ -46,6 +46,25 @@ client.on('ready', () => {  //when the bot goes online create a console log
             },
         ],
     })
+
+    commands?.create({ //create a command
+        name: 'subtract', //the slash command name
+        description: 'Performs subtraction.', //the slash command description
+        options: [ //these will be what you can use within this command
+            {
+                name: 'number1', //name must not contain spaces
+                description: 'The 1st number.',
+                required: true, //need this number
+                type: DiscordJS.Constants.ApplicationCommandOptionTypes.NUMBER,
+            },
+            {
+                name: 'number2',
+                description: 'The 2nd number.',
+                required: true, //need this number
+                type: DiscordJS.Constants.ApplicationCommandOptionTypes.NUMBER,
+            },
+        ],
+    })
 })
 
 client.on('interactionCreate', async (interaction) => {  //create an interaction that occurs when the command "marco" is triggered
@@ -65,6 +84,13 @@ client.on('interactionCreate', async (interaction) => {  //create an interaction
             content: 'The sum of ' + number1 + ' and ' + number2 + ` is equal to ${number1 + number2}`, //Send response, 
             ephemeral: false,                                                   //${} is called a template literal and allows for string interpolation (adding variables within strings)
         })                                                                      //You MUST use a backtick instead of single quotation for template literal to work
+    } else if (commandName === 'subtract') { //create an interaction for our add command
+        const number1 = options.getNumber('number1') || 0 //make number 1 equal the inputted number 1 or 0 if it's null
+        const number2 = options.getNumber('number2') || 0 //make number 2 equal the inputted number 2 or 0 if it's null
+        interaction.reply({
+            content: 'The subtraction of ' + number1 + ' from ' + number2 + ` is equal to ${number1 - number2}`,  
+            ephemeral: false,                                                   
+        })
     }
 })
 
