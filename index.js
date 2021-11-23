@@ -126,7 +126,7 @@ client.on('interactionCreate', async (interaction) => {  //create an interaction
         const number1 = options.getNumber('number1') || 0 //make number 1 equal the inputted number 1 or 0 if it's null
         const number2 = options.getNumber('number2') || 0 //make number 2 equal the inputted number 2 or 0 if it's null
         interaction.reply({
-            content: 'The subtraction of ' + number1 + ' from ' + number2 + ` is equal to ${number1 - number2}`,  
+            content: 'The difference of ' + number1 + ' minus ' + number2 + ` is equal to ${number1 - number2}`,  
             ephemeral: false,                                                   
         })
     } else if (commandName === 'multiply') { //create an interaction for our add command
@@ -140,7 +140,7 @@ client.on('interactionCreate', async (interaction) => {  //create an interaction
         const number1 = options.getNumber('number1') || 0 //make number 1 equal the inputted number 1 or 0 if it's null
         const number2 = options.getNumber('number2') || 0 //make number 2 equal the inputted number 2 or 0 if it's null
         interaction.reply({
-            content: 'The product of ' + number1 + ' and ' + number2 + ` is equal to ${number1 / number2}`,  
+            content: 'The quotient of ' + number1 + ' over ' + number2 + ` is equal to ${number1 / number2}`,  
             ephemeral: false,                                                   
         })
     }
