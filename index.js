@@ -167,13 +167,13 @@ client.on('messageCreate', (message) => {  //writes a message
                     Counter = 0; //reset counter
                     LastSender = null; //reset last sender
                     message.react('🚫');
-                    message.channel.send(`<@!${message.author.id}> You've ruined the count. Try again.`) //message response
+                    message.channel.send(`<@!${message.author.id}> You've ruined the count. Try again.`) //message @ing messager who ruined count
                 }
             } else { //else if the same person counted twice in a row
                 Counter = 0; //reset counter
                 LastSender = null; //reset last sender
                 message.react('🚫');
-                message.channel.send(`<@!${message.author.id}> You can't count two numbers in a row.`) //message response
+                message.channel.send(`<@!${message.author.id}> You can't count two numbers in a row. Try again.`) //message @ing messager who ruined count
             }
         }
     }
