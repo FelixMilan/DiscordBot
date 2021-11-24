@@ -6,9 +6,13 @@ dotenv.config() //gives us access to our .env file so we can use our token etc.
 const client = new DiscordJS.Client({ //required to provide 'intents' on what we'll do with our bot
     intents: [
         Intents.FLAGS.GUILDS, //if you use CTRL+SPACE you can auto import Intents from discord.js
-        Intents.FLAGS.GUILD_MESSAGES //guilds are what are commonly referred to as servers
+        Intents.FLAGS.GUILD_MESSAGES, //guilds are what are commonly referred to as servers
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS //allow for reactions to messages
     ]
 })
+
+let Counter = 0;
+let LastSender = 0;
 
 client.on('ready', () => {  //when the bot goes online create a console log
     console.log('MMUCSBot is online!')
@@ -151,6 +155,27 @@ client.on('messageCreate', (message) => {  //writes a message
         message.reply({ //respond to that message with the contents 'polo'
             content: 'polo',
         })
+    } else if (message.channel.name === 'count'){ //bot will only respond if the channel the message is sent in is call count
+        let number = parseInt(message.content); //create a new number as the message content
+        if (message.content > 0) { //must be larger than 0
+            if (LastSender !== message.author.id) { //the same user can't count twice in a row
+                if (number == Counter + 1) { //the number must be one above the counter
+                    LastSender = message.author.id; 
+                    Counter++; //increment the counter
+                    message.react('☑️');
+                } else { //else if it wasn't the correct number
+                    Counter = 0; //reset counter
+                    LastSender = null; //reset last sender
+                    message.react('🚫');
+                    message.channel.send(`<@!${message.author.id}> You've ruined the count. Try again.`) //message response
+                }
+            } else { //else if the same person counted twice in a row
+                Counter = 0; //reset counter
+                LastSender = null; //reset last sender
+                message.react('🚫');
+                message.channel.send(`<@!${message.author.id}> You can't count two numbers in a row.`) //message response
+            }
+        }
     }
 })
 
